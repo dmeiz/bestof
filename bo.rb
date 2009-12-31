@@ -3,20 +3,6 @@ require 'sinatra'
 require 'haml'
 require 'mp3info'
 
-@music = [
-  {:artist => "The Ponys", :title => "Harakiri", }
-]
-
-
-=begin
-Mp3Info.open("public/10 Harakiri.mp3") {|info| apic = info.tag2["APIC"]}
-img = apic[14..-1]
-File.open("img.jpg", "w") {|f| f.write img}
-
-"0foo" "", "foo"
-"00foo"
-=end
-
 # Removes 0-delimited value from string, returning that value and the resulting
 # string.
 def pop(s)
@@ -40,31 +26,42 @@ def apic_to_file(apic, mp3_name)
     else raise "Unknown mime type #{mime_type}"
   end
 
-  File.open("public/#{base}.#{ext}", "w") do |f|
+  filename = "public/#{base}.#{ext}"
+
+  File.open(filename, "w") do |f|
     f.write(apic)
   end
+
+  filename
 end
 
 # Extracts interesting attributes from an mp3 and returns them in a hash.
 def mp3_atts(filename)
-  atts = {}
+  atts = {
+    :filename => File.basename(filename)
+  }
+
   Mp3Info.open(filename) do |info|
     %w(artist title album year).each do |key|
       atts[key.to_sym] = info.tag1[key]
     end
 
     if apic = info.tag2["APIC"]
-      apic_to_file(apic, filename)
+      atts[:image_filename] = File.basename(apic_to_file(apic, filename))
     end
   end
+
   atts
 end
 
+@@songs = []
+
 Dir.glob("public/*.mp3") do |filename|
-  puts mp3_atts(filename)
+  @@songs << mp3_atts(filename)
 end
 
 get "/" do
+  @songs = @@songs
   haml :index
 end
 

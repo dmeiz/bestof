@@ -3,3 +3,13 @@
   %title Dan's Best of 2009
 %body
   %h1 Dan's Best of 2009
+  %table
+    - @songs.each do |song|
+      %tr
+        %td
+          %img{:src => song[:image_filename]}
+        %td= song[:artist]
+        %td= song[:album]
+        %td
+          %a{:href => song[:filename]}= song[:title]
+    
