@@ -1,15 +1,20 @@
 !!!
 %head
-  %title Dan's Best of 2009
+  %title Best of 2009
+  %link{:rel => "stylesheet", :type => "text/css", :href => "bo.css"}
 %body
-  %h1 Dan's Best of 2009
-  %table
-    - @songs.each do |song|
-      %tr
-        %td
-          %img{:src => song[:image_filename]}
-        %td= song[:artist]
-        %td= song[:album]
-        %td
-          %a{:href => song[:filename]}= song[:title]
+  #main
+    %h1 Best of 2009
+    %table
+      - @songs.each do |song|
+        %tr
+          %td.cover
+            %a{:href => song[:filename]}
+              %img{:src => song[:image_filename], :width => "128", :height => "128"}
+          %td
+            %div
+              %span.artist= song[:artist]
+              %span.album= song[:album]
+            .title
+              %a{:href => song[:filename]}= song[:title]
     
