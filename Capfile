@@ -1,12 +1,12 @@
+load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+
 set :application, "bestof"
-set :repository,  "git@github.com:dmeiz/bestof.git"
+set :repository,  "git://github.com/dmeiz/bestof.git"
 set :scm, "git"
 set :user, "dev"
 set :branch, "master"
 
 role :app, "bestof.methodhead.com"
-role :web, "bestof.methodhead.com"
-role :db, "betagrove.com", :primary => true
 
 namespace :deploy do
   task :start, :roles => :app do
