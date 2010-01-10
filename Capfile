@@ -5,6 +5,7 @@ set :repository,  "git://github.com/dmeiz/bestof.git"
 set :scm, "git"
 set :user, "dev"
 set :branch, "master"
+set :deploy_via, :remote_cache
 
 role :app, "bestof.methodhead.com"
 
