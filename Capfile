@@ -21,4 +21,9 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
   end
+
+  task :finalize_update, :except => { :no_release => true } do
+    run "chmod -R g+w #{latest_release}" if fetch(:group_writable, true)
+    run "ln -s #{shared_path}/mp3s #{latest_release}/public/mp3s"
+  end
 end
