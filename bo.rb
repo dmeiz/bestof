@@ -14,9 +14,9 @@ end
 # for the name.  Returns the filename.
 def apic_to_file(apic, mp3_name)
   apic = apic[1..-1]           # encoding
-  mime_type, apic = pop(apic) # mime type
+  mime_type, apic = pop(apic)  # mime type
   apic = apic[1..-1]           # picture type
-  desc, apic = pop(apic)      # description
+  desc, apic = pop(apic)       # description
 
   base = File.basename(mp3_name, ".mp3")
 
@@ -38,7 +38,7 @@ end
 # Extracts interesting attributes from an mp3 and returns them in a hash.
 def mp3_atts(filename)
   atts = {
-    :filename => File.basename(filename)
+    :filename => "mp3s/" + File.basename(filename)
   }
 
   Mp3Info.open(filename) do |info|
@@ -56,7 +56,7 @@ end
 
 @@songs = []
 
-Dir.glob("public/*.mp3") do |filename|
+Dir.glob("public/mp3s/*.mp3") do |filename|
   @@songs << mp3_atts(filename)
 end
 
