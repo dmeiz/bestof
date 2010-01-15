@@ -3,6 +3,15 @@
   padding: 0;
 }
 
+a {
+  color: #810000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 body {
   background-image: url(bg.jpg);
   font: normal 12pt sans-serif;
@@ -12,7 +21,13 @@ h1 {
   color: #810000;
   font: bold 36pt Georgia,sans-serif;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
+}
+
+h2 {
+  font: normal 12pt sans-serif;
+  text-align: center;
+  padding: 10px;
 }
 
 img {

@@ -5,6 +5,10 @@
 %body
   #main
     %h1 Best of 2009
+    %h2
+      %a{:href => "/playlist.m3u"}
+        %img{:src => "/playlist.jpg", :style => "vertical-align: -5px"}
+        Playlist
     %table
       - @songs.each do |song|
         %tr

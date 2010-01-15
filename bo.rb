@@ -65,3 +65,8 @@ get "/" do
   haml :index
 end
 
+get "/playlist.m3u" do
+  content_type "audio/x-mpegurl"
+  @@songs.collect {|song| "http://#{request.host}/#{song[:filename]}"}.join("\n")
+end
+
