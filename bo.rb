@@ -60,7 +60,7 @@ Dir.glob("public/mp3s/*.mp3") do |filename|
   @@songs << mp3_atts(filename)
 end
 
-@@songs.sort {|a,b| a[:filename] <=> b[:filename]}
+@@songs.sort! {|a,b| a[:filename] <=> b[:filename]}
 
 get "/" do
   @songs = @@songs
